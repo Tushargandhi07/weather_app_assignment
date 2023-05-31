@@ -2,6 +2,7 @@ const express=require("express");
 const cors=require("cors")
 const { connection } = require("./config/db");
 const { userRoute } = require("./routes/userRoute");
+const { router } = require("./routes/search");
 require("dotenv").config();
 
 const app=express();
@@ -13,7 +14,13 @@ app.get("/",(req,res)=>{
     res.send("Welcome")
 })
 
+
 app.use("/user",userRoute)
+
+app.use("/weather",router)
+
+
+
 app.listen(process.env.port,async()=>{
     try {
         await connection;
